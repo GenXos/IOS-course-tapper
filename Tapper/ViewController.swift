@@ -9,17 +9,72 @@
 import UIKit
 
 class ViewController: UIViewController {
+  // Variables
+  var maxTaps = 0
+  var currentTaps = 0
+  
+  // Outlets
+  @IBOutlet weak var logoImg: UIImageView!
+  @IBOutlet weak var playBtn: UIButton!
+  @IBOutlet weak var howManyTapsText: UITextField!
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+  @IBOutlet weak var coinImg: UIButton!
+  @IBOutlet weak var tapsLbl: UILabel!
+
+  @IBAction func onCoinTapped(sender: UIButton) {
+    
+    currentTaps++
+    updateTapsLabel()
+    if isGameOver() {
+      
+      restartGame()
+    }
+    
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  
+  @IBAction func onPlayButtonPressed(sender: UIButton) {
+   
+    if howManyTapsText.text != nil && howManyTapsText.text != "" {
+      logoImg.hidden = true;
+      playBtn.hidden = true
+      howManyTapsText.hidden = true
+      
+      coinImg.hidden = false
+      tapsLbl.hidden = false
+      
+      maxTaps = Int(howManyTapsText.text!)!
+      currentTaps = 0
+      
+      updateTapsLabel()
+    }
   }
-
+  
+  func restartGame() {
+    
+    maxTaps = 0
+    howManyTapsText.text = ""
+    
+    logoImg.hidden = false
+    playBtn.hidden = false
+    howManyTapsText.hidden = false
+    
+    coinImg.hidden = true
+    tapsLbl.hidden = true
+  }
+  
+  func isGameOver() -> Bool {
+    
+    if currentTaps >= maxTaps {
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  func updateTapsLabel() {
+    
+    tapsLbl.text = "\(currentTaps) Taps"
+  }
 
 }
 
