@@ -1,2 +1,2 @@
-# IOS-course-tapper
+# tapper
 Tapper game project
