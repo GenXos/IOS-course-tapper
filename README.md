@@ -1,2 +1,2 @@
 # tapper
-Tapper game project
+Tapper game
